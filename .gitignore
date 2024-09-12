@@ -1,2 +1,6 @@
 node_modules/
 build/
+forge-release/
+broadcast
+out
+cache

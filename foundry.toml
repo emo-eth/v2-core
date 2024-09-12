@@ -1,10 +1,27 @@
 [profile.default]
-src = "src"
+src = "contracts"
 out = "out"
-libs = ["lib"]
+libs = ["node_modules", 'lib']
 remappings = [
     "ds-test/=lib/forge-std/lib/ds-test/src/",
     "forge-std/=lib/forge-std/src/",
+    "create2-helpers-scripts/=lib/create2-helpers/script/",
 ]
+fs_permissions = [{ access = "read", path = "./forge-release" }]
+
+
+[profile.release]
+evm_version = 'istanbul'
+optimizer_runs = 999999
+solc_version = "0.5.16"
+test = 'contracts'
+script = 'contracts'
+out = 'forge-release'
+# remappings change produced initcode (seemingly irrespective of metadata settings)
+# and forge automatically generates remappings for libs, so set both to empty
+# h/t 0xjustadev
+libs = []
+remappings = []
+
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
